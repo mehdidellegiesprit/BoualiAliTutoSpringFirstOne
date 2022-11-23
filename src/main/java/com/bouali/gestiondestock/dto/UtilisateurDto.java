@@ -1,12 +1,9 @@
 package com.bouali.gestiondestock.dto;
 
-import com.bouali.gestiondestock.model.Adresse;
-import com.bouali.gestiondestock.model.Entreprise;
-import com.bouali.gestiondestock.model.Roles;
+
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
 
