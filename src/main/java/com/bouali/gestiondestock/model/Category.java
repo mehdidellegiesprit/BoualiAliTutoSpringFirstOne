@@ -9,7 +9,8 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Data
-@Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -25,4 +26,6 @@ public class Category extends AbstractEntity{
 
     @OneToMany(mappedBy = "category")
     private List<Article> articles ;
+
+
 }
