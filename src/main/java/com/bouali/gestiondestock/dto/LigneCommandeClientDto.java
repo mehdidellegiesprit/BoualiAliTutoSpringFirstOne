@@ -17,11 +17,11 @@ public class LigneCommandeClientDto {
     private Integer id ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private ArticleDto article ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private CommandeClientDto commandeClient ;
 
     private BigDecimal quantite ;
@@ -38,6 +38,8 @@ public class LigneCommandeClientDto {
                 .id(ligneCommandeClient.getId())
                 .quantite(ligneCommandeClient.getQuantite())
                 .prixUnitaire(ligneCommandeClient.getPrixUnitaire())
+                .article(ArticleDto.fromEntity(ligneCommandeClient.getArticle()))
+                .commandeClient(CommandeClientDto.fromEntity(ligneCommandeClient.getCommandeClient()))
                 .build();
     }
 
@@ -49,6 +51,9 @@ public class LigneCommandeClientDto {
         ligneCommandeClient.setId(ligneCommandeClientDto.getId());
         ligneCommandeClient.setQuantite(ligneCommandeClientDto.getQuantite());
         ligneCommandeClient.setPrixUnitaire(ligneCommandeClientDto.getPrixUnitaire());
+        ligneCommandeClient.setArticle(ArticleDto.toEntity(ligneCommandeClientDto.getArticle()));
+        ligneCommandeClient.setArticle(ArticleDto.toEntity(ligneCommandeClientDto.getArticle()));
+        ligneCommandeClient.setCommandeClient(CommandeClientDto.toEntity(ligneCommandeClientDto.getCommandeClient()));
         return ligneCommandeClient;
 
     }

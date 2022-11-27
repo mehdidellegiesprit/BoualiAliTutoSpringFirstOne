@@ -16,7 +16,7 @@ public class RoleDto {
     private String roleName ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private UtilisateurDto utilisateur ;
 
     public static RoleDto fromEntity (Roles roles){
@@ -27,6 +27,7 @@ public class RoleDto {
         return RoleDto.builder()
                 .id(roles.getId())
                 .roleName(roles.getRoleName())
+                .utilisateur(UtilisateurDto.fromEntity(roles.getUtilisateur()))
                 .build();
     }
 
@@ -37,6 +38,7 @@ public class RoleDto {
         Roles roles = new Roles() ;
         roles.setId(roleDto.getId());
         roles.setRoleName(roleDto.getRoleName());
+        roles.setUtilisateur(UtilisateurDto.toEntity(roleDto.getUtilisateur()));
         return roles;
 
     }

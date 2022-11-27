@@ -19,7 +19,7 @@ public class ClientDto {
     private String prenom ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private AdresseDto adresse ;
 
     private String photo ;
@@ -44,6 +44,7 @@ public class ClientDto {
                 .photo(client.getPhoto())
                 .mail(client.getMail())
                 .numTel(client.getMail())
+                .adresse(AdresseDto.fromEntity(client.getAdresse()))
                 .build();
     }
     public static Client toEntity(ClientDto clientDto){
@@ -60,6 +61,7 @@ public class ClientDto {
         client.setPhoto(clientDto.getPhoto());
         client.setMail(clientDto.getMail());
         client.setNumTel(clientDto.getNumTel());
+        client.setAdresse(AdresseDto.toEntity(clientDto.getAdresse()));
         return client;
     }
 }

@@ -15,7 +15,7 @@ public class LigneVenteDto {
     private Integer id ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private VentesDto vente ;
 
     private BigDecimal quantite ;
@@ -31,6 +31,7 @@ public class LigneVenteDto {
                 .id(ligneVente.getId())
                 .quantite(ligneVente.getQuantite())
                 .prixUnitaire(ligneVente.getPrixUnitaire())
+                .vente(VentesDto.fromEntity(ligneVente.getVente()))
                 .build();
     }
 
@@ -42,6 +43,7 @@ public class LigneVenteDto {
         ligneVente.setId(ligneVenteDto.getId());
         ligneVente.setQuantite(ligneVenteDto.getQuantite());
         ligneVente.setPrixUnitaire(ligneVenteDto.getPrixUnitaire());
+        ligneVente.setVente(VentesDto.toEntity(ligneVenteDto.getVente()));
         return ligneVente;
 
     }

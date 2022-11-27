@@ -27,14 +27,14 @@ public class UtilisateurDto {
     private String motDePasse;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private AdresseDto adresse ;
 
     private String photo ;
 
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private EntrepriseDto entreprise ;
 
     // fix me plz dall
@@ -54,6 +54,8 @@ public class UtilisateurDto {
                 .dateDeNaissance(utilisateur.getDateDeNaissance())
                 .motDePasse(utilisateur.getMotDePasse())
                 .photo(utilisateur.getPhoto())
+                .adresse(AdresseDto.fromEntity(utilisateur.getAdresse()))
+                .entreprise(EntrepriseDto.fromEntity(utilisateur.getEntreprise()))
                 .build();
     }
 
@@ -75,6 +77,8 @@ public class UtilisateurDto {
         utilisateur.setDateDeNaissance(utilisateurDto.getDateDeNaissance());
         utilisateur.setMotDePasse(utilisateurDto.getMotDePasse());
         utilisateur.setPhoto(utilisateurDto.getMotDePasse());
+        utilisateur.setAdresse(AdresseDto.toEntity(utilisateurDto.getAdresse()));
+        utilisateur.setEntreprise(EntrepriseDto.toEntity(utilisateurDto.getEntreprise()));
         return utilisateur;
     }
 }

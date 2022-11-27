@@ -21,7 +21,7 @@ public class CommandeClientDto {
     private Instant dateCommande ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private ClientDto client ;
 
 
@@ -38,6 +38,7 @@ public class CommandeClientDto {
                 .id(commandeClient.getId())
                 .code(commandeClient.getCode())
                 .dateCommande(commandeClient.getDateCommande())
+                .client(ClientDto.fromEntity(commandeClient.getClient()))
                 .build();
     }
 
@@ -49,6 +50,8 @@ public class CommandeClientDto {
         commandeClient.setId(commandeClientDto.getId());
         commandeClient.setCode(commandeClientDto.getCode());
         commandeClient.setDateCommande(commandeClientDto.getDateCommande());
+        //        client.setAdresse(AdresseDto.toEntity(clientDto.getAdresse()));
+        commandeClient.setClient(ClientDto.toEntity(commandeClientDto.getClient()));
         return commandeClient;
 
     }

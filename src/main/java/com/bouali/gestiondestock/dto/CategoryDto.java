@@ -31,7 +31,6 @@ public class CategoryDto {
                 .code(category.getCode())
                 .designation(category.getDesignation())
                 .build();
-
     }
     public static Category toEntity(CategoryDto categoryDto){
         if (categoryDto==null){

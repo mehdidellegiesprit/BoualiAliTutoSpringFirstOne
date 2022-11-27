@@ -22,7 +22,7 @@ public class MvtStkDto {
     private BigDecimal quantite ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private ArticleDto article ;
 
     private TypeMvtStk typeMvt ;
@@ -37,6 +37,7 @@ public class MvtStkDto {
                 .dateMvt(mvtStk.getDateMvt())
                 .quantite(mvtStk.getQuantite())
                 .typeMvt(mvtStk.getTypeMvt())
+                .article(ArticleDto.fromEntity(mvtStk.getArticle()))
                 .build();
     }
 
@@ -49,6 +50,7 @@ public class MvtStkDto {
         mvtStk.setDateMvt(mvtStkDto.getDateMvt());
         mvtStk.setQuantite(mvtStkDto.getQuantite());
         mvtStk.setTypeMvt(mvtStkDto.getTypeMvt());
+        mvtStk.setArticle(ArticleDto.toEntity(mvtStkDto.getArticle()));
         return mvtStk;
     }
 }

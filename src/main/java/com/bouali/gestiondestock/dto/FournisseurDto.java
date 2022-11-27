@@ -22,7 +22,7 @@ public class FournisseurDto {
 
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private AdresseDto adresse ;
 
     private String photo ;
@@ -49,6 +49,7 @@ public class FournisseurDto {
                 .photo(fournisseur.getPhoto())
                 .mail(fournisseur.getMail())
                 .numTel(fournisseur.getMail())
+                .adresse(AdresseDto.fromEntity(fournisseur.getAdresse()))
                 .build();
     }
     public static Fournisseur toEntity(FournisseurDto fournisseurDto){
@@ -65,6 +66,7 @@ public class FournisseurDto {
         fournisseur.setPhoto(fournisseurDto.getPhoto());
         fournisseur.setMail(fournisseurDto.getMail());
         fournisseur.setNumTel(fournisseurDto.getNumTel());
+        fournisseur.setAdresse(AdresseDto.toEntity(fournisseurDto.getAdresse()));
         return fournisseur;
     }
 }

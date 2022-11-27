@@ -21,7 +21,7 @@ public class EntrepriseDto {
     private String description ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private AdresseDto adresse ;
 
     private String codeFiscal ;
@@ -53,6 +53,7 @@ public class EntrepriseDto {
                 .email(entreprise.getEmail())
                 .numTel(entreprise.getNumTel())
                 .steWeb(entreprise.getSteWeb())
+                .adresse(AdresseDto.fromEntity(entreprise.getAdresse()))
                 .build();
     }
 
@@ -69,6 +70,7 @@ public class EntrepriseDto {
         entreprise.setEmail(entrepriseDto.getEmail());
         entreprise.setNumTel(entrepriseDto.getNumTel());
         entreprise.setSteWeb(entrepriseDto.getSteWeb());
+        entreprise.setAdresse(AdresseDto.toEntity(entrepriseDto.getAdresse()));
         return entreprise;
 
     }

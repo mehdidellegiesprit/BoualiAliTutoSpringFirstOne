@@ -27,7 +27,7 @@ public class ArticleDto {
     private String photo ;
 
     //FIX ME IF PROBLEME
-    @JsonIgnore
+    //@JsonIgnore
     private CategoryDto category;
 
     public static ArticleDto fromEntity (Article article){
@@ -43,6 +43,8 @@ public class ArticleDto {
                 .tauxTva(article.getTauxTva())
                 .prixUnitaireTtc(article.getPrixUnitaireTtc())
                 .photo(article.getPhoto())
+                // here o93ed
+                .category(CategoryDto.fromEntity(article.getCategory()))
                 .build();
     }
     public static Article toEntity(ArticleDto articleDto){
@@ -60,6 +62,8 @@ public class ArticleDto {
         article.setTauxTva(articleDto.getTauxTva());
         article.setPrixUnitaireTtc(articleDto.getPrixUnitaireTtc());
         article.setPhoto(articleDto.getPhoto());
+        // fix me baby
+        article.setCategory(CategoryDto.toEntity(articleDto.getCategory()));
         return article;
     }
 }

@@ -16,11 +16,11 @@ public class LigneCommandeFournisseurDto {
     private Integer id ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private ArticleDto article ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private CommandeFournisseurDto commandeFournisseur ;
 
     private BigDecimal quantite ;
@@ -36,6 +36,8 @@ public class LigneCommandeFournisseurDto {
                 .id(ligneCommandeFournisseur.getId())
                 .quantite(ligneCommandeFournisseur.getQuantite())
                 .prixUnitaire(ligneCommandeFournisseur.getPrixUnitaire())
+                .article(ArticleDto.fromEntity(ligneCommandeFournisseur.getArticle()))
+                .commandeFournisseur(CommandeFournisseurDto.fromEntity(ligneCommandeFournisseur.getCommandeFournisseur()))
                 .build();
     }
 
@@ -47,6 +49,8 @@ public class LigneCommandeFournisseurDto {
         ligneCommandeFournisseur.setId(ligneCommandeFournisseurDto.getId());
         ligneCommandeFournisseur.setQuantite(ligneCommandeFournisseurDto.getQuantite());
         ligneCommandeFournisseur.setPrixUnitaire(ligneCommandeFournisseurDto.getPrixUnitaire());
+        ligneCommandeFournisseur.setArticle(ArticleDto.toEntity(ligneCommandeFournisseurDto.getArticle()));
+        ligneCommandeFournisseur.setCommandeFournisseur(CommandeFournisseurDto.toEntity(ligneCommandeFournisseurDto.getCommandeFournisseur()));
         return ligneCommandeFournisseur;
 
     }
