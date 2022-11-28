@@ -18,7 +18,7 @@ public class UtilisateurValidator {
             errors.add("Veuiller renseigner l'email d'utilisteur");
             errors.add("Veuiller renseigner la date de naissance  d'utilisteur");
             errors.add("Le champ pays est obligatoire");
-
+            return errors ;
         }
 
         if (!StringUtils.hasLength(utilisateurDto.getNom())){
