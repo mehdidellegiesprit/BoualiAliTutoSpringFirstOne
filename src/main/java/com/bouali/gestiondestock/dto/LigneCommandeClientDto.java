@@ -16,12 +16,8 @@ public class LigneCommandeClientDto {
 
     private Integer id ;
 
-    // fix me plz dall
-    //@JsonIgnore
     private ArticleDto article ;
 
-    // fix me plz dall
-    //@JsonIgnore
     private CommandeClientDto commandeClient ;
 
     private BigDecimal quantite ;

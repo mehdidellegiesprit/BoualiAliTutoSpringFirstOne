@@ -19,12 +19,10 @@ public class CommandeFournisseurDto {
 
     private Instant dateCommande ;
 
-    // fix me plz dall
-    //@JsonIgnore
     private FournisseurDto fournisseur ;
 
-    // fix me plz dall
-    @JsonIgnore
+    private Integer idEntreprise ;
+
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurs ;
 
     public static CommandeFournisseurDto fromEntity (CommandeFournisseur commandeFournisseur){
@@ -37,6 +35,7 @@ public class CommandeFournisseurDto {
                 .code(commandeFournisseur.getCode())
                 .dateCommande(commandeFournisseur.getDateCommande())
                 .fournisseur(FournisseurDto.fromEntity(commandeFournisseur.getFournisseur()))
+                .idEntreprise(commandeFournisseur.getIdEntreprise())
                 .build();
     }
 
@@ -49,6 +48,7 @@ public class CommandeFournisseurDto {
         commandeFournisseur.setCode(commandeFournisseurDto.getCode());
         commandeFournisseur.setDateCommande(commandeFournisseurDto.getDateCommande());
         commandeFournisseur.setFournisseur(FournisseurDto.toEntity(commandeFournisseurDto.getFournisseur()));
+        commandeFournisseur.setIdEntreprise(commandeFournisseurDto.getIdEntreprise()); //!!!!!!! kamel lo5rin
         return commandeFournisseur;
 
     }

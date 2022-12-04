@@ -15,12 +15,8 @@ public class LigneCommandeFournisseurDto {
 
     private Integer id ;
 
-    // fix me plz dall
-    //@JsonIgnore
     private ArticleDto article ;
 
-    // fix me plz dall
-    //@JsonIgnore
     private CommandeFournisseurDto commandeFournisseur ;
 
     private BigDecimal quantite ;

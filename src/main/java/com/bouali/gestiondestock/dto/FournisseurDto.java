@@ -31,6 +31,7 @@ public class FournisseurDto {
 
     private String numTel ;
 
+    private Integer idEntreprise ;
 
     // fix me plz dall
     @JsonIgnore
@@ -50,6 +51,7 @@ public class FournisseurDto {
                 .mail(fournisseur.getMail())
                 .numTel(fournisseur.getMail())
                 .adresse(AdresseDto.fromEntity(fournisseur.getAdresse()))
+                .idEntreprise(fournisseur.getIdEntreprise())
                 .build();
     }
     public static Fournisseur toEntity(FournisseurDto fournisseurDto){
@@ -67,6 +69,7 @@ public class FournisseurDto {
         fournisseur.setMail(fournisseurDto.getMail());
         fournisseur.setNumTel(fournisseurDto.getNumTel());
         fournisseur.setAdresse(AdresseDto.toEntity(fournisseurDto.getAdresse()));
+        fournisseur.setIdEntreprise(fournisseurDto.getIdEntreprise());
         return fournisseur;
     }
 }

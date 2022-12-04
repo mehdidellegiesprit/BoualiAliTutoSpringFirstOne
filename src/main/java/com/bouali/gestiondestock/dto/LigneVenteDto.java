@@ -14,14 +14,16 @@ public class LigneVenteDto {
 
     private Integer id ;
 
-    // fix me plz dall
-    //@JsonIgnore
     private VentesDto vente ;
 
     private BigDecimal quantite ;
 
     // le prix d'achat important dans l historique
     private BigDecimal prixUnitaire ;
+
+    private ArticleDto article ;
+
+
     public static LigneVenteDto fromEntity (LigneVente ligneVente){
 
         if (ligneVente==null){
@@ -32,6 +34,7 @@ public class LigneVenteDto {
                 .quantite(ligneVente.getQuantite())
                 .prixUnitaire(ligneVente.getPrixUnitaire())
                 .vente(VentesDto.fromEntity(ligneVente.getVente()))
+                .article(ArticleDto.fromEntity(ligneVente.getArticle()))
                 .build();
     }
 
@@ -44,6 +47,7 @@ public class LigneVenteDto {
         ligneVente.setQuantite(ligneVenteDto.getQuantite());
         ligneVente.setPrixUnitaire(ligneVenteDto.getPrixUnitaire());
         ligneVente.setVente(VentesDto.toEntity(ligneVenteDto.getVente()));
+        ligneVente.setArticle(ArticleDto.toEntity(ligneVenteDto.getArticle()));
         return ligneVente;
 
     }

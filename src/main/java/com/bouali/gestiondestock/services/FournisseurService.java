@@ -1,0 +1,17 @@
+package com.bouali.gestiondestock.services;
+
+import com.bouali.gestiondestock.dto.EntrepriseDto;
+import com.bouali.gestiondestock.dto.FournisseurDto;
+
+import java.util.List;
+
+public interface FournisseurService {
+
+    FournisseurDto save(FournisseurDto dto) ;
+
+    FournisseurDto findById(Integer id) ;
+
+    List<FournisseurDto> findALl() ;
+
+    void delete(Integer id) ;
+}

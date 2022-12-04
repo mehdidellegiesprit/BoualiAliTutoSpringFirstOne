@@ -4,5 +4,9 @@ import com.bouali.gestiondestock.model.Article;
 import com.bouali.gestiondestock.model.Ventes;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VentesRepository extends JpaRepository<Integer, Ventes> {
+import java.util.Optional;
+
+public interface VentesRepository extends JpaRepository<Ventes,Integer> {
+
+    Optional<Ventes> findVentesByCode(String code) ;
 }
