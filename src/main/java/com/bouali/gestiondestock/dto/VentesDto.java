@@ -3,12 +3,15 @@ package com.bouali.gestiondestock.dto;
 import com.bouali.gestiondestock.model.Adresse;
 import com.bouali.gestiondestock.model.LigneVente;
 import com.bouali.gestiondestock.model.Ventes;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.List;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
 public class VentesDto {

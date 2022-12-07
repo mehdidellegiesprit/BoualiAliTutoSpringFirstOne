@@ -3,10 +3,13 @@ package com.bouali.gestiondestock.dto;
 import com.bouali.gestiondestock.model.Adresse;
 import com.bouali.gestiondestock.model.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
 public class RoleDto {

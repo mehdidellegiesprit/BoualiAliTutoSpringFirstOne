@@ -25,17 +25,22 @@ public class AbstractEntity implements Serializable {
     private Integer id ;
 
     @CreatedDate
-    @Column(name="creationDate",nullable=false)
-    @JsonIgnore
+    @Column(name="creationDate")
     private Instant creationDate ;
 
     @LastModifiedDate
     @Column(name="lastModifiedDate")
-    @JsonIgnore
     private Instant lastModifiedDate;
 
-
-
+    //prePersist or preInsert the same things avant a persistange ! cest avant l'enregistremrnt dans la BD
+    @PrePersist
+    void prePersist (){
+        creationDate = Instant.now();
+    }
+    @PreUpdate
+    void preUpdate (){
+        lastModifiedDate = Instant.now();
+    }
 
 
 }

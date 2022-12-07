@@ -3,11 +3,14 @@ package com.bouali.gestiondestock.dto;
 import com.bouali.gestiondestock.model.Category;
 import com.bouali.gestiondestock.model.Client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
 public class ClientDto {

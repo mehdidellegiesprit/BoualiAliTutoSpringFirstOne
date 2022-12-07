@@ -6,6 +6,7 @@ import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.RequestContext;
 import com.flickr4java.flickr.auth.Auth;
 import com.flickr4java.flickr.auth.Permission;
+import com.flickr4java.flickr.test.TestInterface;
 import com.github.scribejava.apis.FlickrApi;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth1AccessToken;
@@ -16,6 +17,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
@@ -64,7 +67,7 @@ public class FlickrConfihuration {
         return flickr ;
     }*/
     @Bean
-    public Flickr getFlickr(){
+    public Flickr getFlickr() throws FlickrException {
         // connect to the api flickr
         Flickr flickr = new Flickr(apiKey,apiSecret,new REST()) ;
 

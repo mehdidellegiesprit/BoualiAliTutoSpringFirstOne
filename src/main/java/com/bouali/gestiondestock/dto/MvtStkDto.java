@@ -4,13 +4,16 @@ import com.bouali.gestiondestock.model.LigneVente;
 import com.bouali.gestiondestock.model.MvtStk;
 import com.bouali.gestiondestock.model.TypeMvtStk;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.math.BigDecimal;
 import java.time.Instant;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
 public class MvtStkDto {

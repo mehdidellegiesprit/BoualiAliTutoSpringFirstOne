@@ -18,7 +18,17 @@ server:
   port: 8081
 
 flickr:
-  apiKey:  d7ba7e92a1d826d6116e38f40ddc22cb
+  apiKey: d7ba7e92a1d826d6116e38f40ddc22cb
   apiSecret:  0a8c20d1084d8668
   appKey: 72157720866468106-1efcf9c8e14c74a5
   appSecret:  277237bdfc096841
+
+mvc:
+  pathmatch:
+    matching-strategy:  ant_path_matcher
+
+#security:
+#  user:
+#    name: root
+#    password: 1234
+

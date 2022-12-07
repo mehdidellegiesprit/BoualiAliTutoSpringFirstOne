@@ -4,12 +4,15 @@ package com.bouali.gestiondestock.dto;
 import com.bouali.gestiondestock.model.CommandeFournisseur;
 import com.bouali.gestiondestock.model.Entreprise;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.util.List;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Data
 public class EntrepriseDto {
