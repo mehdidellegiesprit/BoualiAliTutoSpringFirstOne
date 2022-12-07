@@ -82,6 +82,44 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.8</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>
+                                <location>com.bouali.gestiondestock.controller</location>
+                            </locations>
+                            <basePath>http://localhost:8081</basePath>
+                                <info>
+                                    <title>Swagger Api Documentation for Gestion Application</title>
+                                    <version>${project.version}</version>
+                                    <description>Swagger Api Documentation for Gestion de stock applicatoin </description>
+                                    <contact>
+                                        <email>bouali.social@gmail.com</email>
+                                        <name>Ali bouali</name>
+                                        <url>https://www.udemy.com</url>
+                                    </contact>
+                                </info>
+                                <outputPath>${project.build.directory}</outputPath>
+                                <outputFormats>json</outputFormats>
+                                <swaggerApiReader>com.github.kongchen.swagger.docgen.reader.SpringMvcApiReader</swaggerApiReader>
+                                <swaggerDirectory>${project.build.directory}</swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
