@@ -25,7 +25,7 @@ public class AbstractEntity implements Serializable {
     private Integer id ;
 
     @CreatedDate
-    @Column(name="creationDate")
+    @Column(name="creationDate",nullable = false,updatable = false)
     private Instant creationDate ;
 
     @LastModifiedDate
@@ -33,6 +33,9 @@ public class AbstractEntity implements Serializable {
     private Instant lastModifiedDate;
 
     //prePersist or preInsert the same things avant a persistange ! cest avant l'enregistremrnt dans la BD
+
+/*
+    c'est un fix rapide
     @PrePersist
     void prePersist (){
         creationDate = Instant.now();
@@ -40,7 +43,7 @@ public class AbstractEntity implements Serializable {
     @PreUpdate
     void preUpdate (){
         lastModifiedDate = Instant.now();
-    }
+    }*/
 
 
 }

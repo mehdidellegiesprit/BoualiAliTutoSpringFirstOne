@@ -8,12 +8,14 @@ spring:
   jpa:
     database: MYSQL
     show-sql: false
+    properties:
+      hibernate:
+        ejb:
+          interceptor: com.bouali.gestiondestock.Interceptor.Interceptor
     ##Hibernate DDL Auto (create,create-drop,update)
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect:  org.hibernate.dialect.MySQL5Dialect
+      dialect: org.hibernate.dialect.MySQL5Dialect
 server:
   port: 8081
 
@@ -23,12 +25,6 @@ flickr:
   appKey: 72157720866468106-1efcf9c8e14c74a5
   appSecret:  277237bdfc096841
 
-mvc:
-  pathmatch:
-    matching-strategy:  ant_path_matcher
-
-#security:
-#  user:
-#    name: root
-#    password: 1234
-
+  mvc:
+    pathmatch:
+      matching-strategy:  ant_path_matcher

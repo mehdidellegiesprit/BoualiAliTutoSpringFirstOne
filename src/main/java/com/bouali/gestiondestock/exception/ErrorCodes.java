@@ -1,6 +1,8 @@
 package com.bouali.gestiondestock.exception;
 
 public enum ErrorCodes {
+
+    BAD_CREDENTIALS(1997),
     ARTICLE_NOT_FOUND(1000),
     ARTICLE_NOT_VALID(10001),
     CATEGORY_NOT_FOUND(2000),

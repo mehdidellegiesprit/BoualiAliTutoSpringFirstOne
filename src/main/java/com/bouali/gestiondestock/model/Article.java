@@ -38,4 +38,5 @@ public class Article extends AbstractEntity{
     private Integer idEntreprise ;
 
 
+
 }

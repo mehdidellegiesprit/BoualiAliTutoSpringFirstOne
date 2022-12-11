@@ -1,8 +1,6 @@
 package com.bouali.gestiondestock.dto;
 
-import com.bouali.gestiondestock.model.Adresse;
 import com.bouali.gestiondestock.model.Roles;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class RoleDto {
+public class RolesDto {
 
     private Integer id ;
 
@@ -22,26 +20,26 @@ public class RoleDto {
     //@JsonIgnore
     private UtilisateurDto utilisateur ;
 
-    public static RoleDto fromEntity (Roles roles){
+    public static RolesDto fromEntity (Roles roles){
 
         if (roles==null){
             return null ;
         }
-        return RoleDto.builder()
+        return RolesDto.builder()
                 .id(roles.getId())
                 .roleName(roles.getRoleName())
                 .utilisateur(UtilisateurDto.fromEntity(roles.getUtilisateur()))
                 .build();
     }
 
-    public static Roles toEntity (RoleDto roleDto){
-        if (roleDto==null){
+    public static Roles toEntity (RolesDto rolesDto){
+        if (rolesDto ==null){
             return null ;
         }
         Roles roles = new Roles() ;
-        roles.setId(roleDto.getId());
-        roles.setRoleName(roleDto.getRoleName());
-        roles.setUtilisateur(UtilisateurDto.toEntity(roleDto.getUtilisateur()));
+        roles.setId(rolesDto.getId());
+        roles.setRoleName(rolesDto.getRoleName());
+        roles.setUtilisateur(UtilisateurDto.toEntity(rolesDto.getUtilisateur()));
         return roles;
 
     }

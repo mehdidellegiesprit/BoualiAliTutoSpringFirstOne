@@ -1,7 +1,6 @@
 package com.bouali.gestiondestock.dto;
 
 
-import com.bouali.gestiondestock.model.Client;
 import com.bouali.gestiondestock.model.Utilisateur;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -42,7 +41,7 @@ public class UtilisateurDto {
 
     // fix me plz dall
     @JsonIgnore
-    private List<RoleDto> roles ;
+    private List<RolesDto> roles ;
     public static UtilisateurDto fromEntity(Utilisateur utilisateur){
         if (utilisateur==null){
             return null ;
