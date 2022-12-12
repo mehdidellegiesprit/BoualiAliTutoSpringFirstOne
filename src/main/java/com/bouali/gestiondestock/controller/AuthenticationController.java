@@ -39,7 +39,7 @@ public class AuthenticationController {
                         request.getPassword()
                 )
         );
-        System.out.println("im here ");
+        //System.out.println("im here ");
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getLogin());
         final String jwt = jwtUtil.generateToken((ExtendedUser) userDetails);
         return ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt).build());

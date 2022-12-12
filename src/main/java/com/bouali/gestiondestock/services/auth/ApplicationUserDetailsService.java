@@ -1,11 +1,13 @@
 package com.bouali.gestiondestock.services.auth;
 
 import com.bouali.gestiondestock.Repository.UtilisateurRepository;
+import com.bouali.gestiondestock.dto.RolesDto;
 import com.bouali.gestiondestock.dto.UtilisateurDto;
 import com.bouali.gestiondestock.exception.EntityNotFoundException;
 import com.bouali.gestiondestock.exception.ErrorCodes;
 import com.bouali.gestiondestock.model.Utilisateur;
 import com.bouali.gestiondestock.model.auth.ExtendedUser;
+import com.bouali.gestiondestock.services.RolesService;
 import com.bouali.gestiondestock.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,21 +27,28 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UtilisateurService service ;
+    @Autowired
+    private RolesService rolesService ;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         UtilisateurDto utilisateur = service.findByEmail(email);
-        System.out.println("***************Roles******************");
-        System.out.println(service.findByEmail(email).getRoles());
+//        System.out.println("***************Roles******************");
+//        System.out.println(service.findByEmail(email).getRoles());
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        //authorities.add(new SimpleGrantedAuthority("ADMIN"));
         // TODO njib liste des roles emte3 l user hetha utilisateur
         // TODO get roles by utilisateur
         // TODO Create repository de role et implementer les methodes
-//        utilisateur.getRoles()
-//                .forEach
-//                        (role->authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
+        List<RolesDto> rolesUser = rolesService.findRolesByUtilisateur(utilisateur.getId());
+//        System.out.println("/n ***********rolesUser*************");
+//        System.out.println(rolesUser);
+//        System.out.println("/n ***********rolesUserSIZE*************");
+ //      System.out.println(rolesUser.size());
+        rolesUser
+                .forEach
+                        (role->authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
 
 
         return new ExtendedUser(utilisateur.getEmail(), utilisateur.getMotDePasse(), utilisateur.getEntreprise().getId(),authorities) ;
