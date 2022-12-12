@@ -12,7 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name="utilisateur")
-public class Utilisateur extends AbstractEntity{
+public class    Utilisateur extends AbstractEntity{
 
 
     @Column(name = "nom")

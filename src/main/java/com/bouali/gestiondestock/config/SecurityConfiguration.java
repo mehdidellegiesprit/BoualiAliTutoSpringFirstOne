@@ -13,6 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -45,15 +47,16 @@ private static final String[] AUTH_WHITELIST = {
         auth.userDetailsService(applicationUserDetailsService)
             .passwordEncoder(passwordEncoder());
     }
+    // TODO add her new
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-        //http
                 //.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
-                .authorizeRequests().antMatchers("/**/authenticate",
-                        "**/entreprises/create",
-                        "**/utilisateurs/all",
+                .authorizeRequests().antMatchers("/**/auth/authenticate",
+                        "/**/authenticate",
+                        "/**/entreprises/create",
+                        "/**/utilisateurs/all",
                         "/v2/api-docs",
                         "/swagger-resources",
                         "/swagger-resources/**",
@@ -64,7 +67,6 @@ private static final String[] AUTH_WHITELIST = {
                         "/v3/api-docs/**",
                         "swagger-ui/**").permitAll() // TODO ces URL SONT PERMIT SANS AVOIR ETRE AUTHENTIFIER (sans token)
                 .anyRequest().authenticated()
-                //.anyRequest().permitAll()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) ;
 

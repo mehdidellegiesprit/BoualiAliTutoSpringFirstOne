@@ -40,7 +40,7 @@ public class UtilisateurDto {
     private EntrepriseDto entreprise ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private List<RolesDto> roles ;
     public static UtilisateurDto fromEntity(Utilisateur utilisateur){
         if (utilisateur==null){

@@ -6,6 +6,7 @@ import com.bouali.gestiondestock.dto.auth.AuthenticationResponse;
 import com.bouali.gestiondestock.model.auth.ExtendedUser;
 import com.bouali.gestiondestock.services.auth.ApplicationUserDetailsService;
 import com.bouali.gestiondestock.utils.JwtUtil;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,12 +32,14 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate (@RequestBody AuthenticationRequest request){
         //TODO elle va verfier si le user avec ce login e mdp existe dans la base ou non si non elle va lever une exception !
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getLogin(),
                         request.getPassword()
                 )
         );
+        System.out.println("im here ");
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getLogin());
         final String jwt = jwtUtil.generateToken((ExtendedUser) userDetails);
         return ResponseEntity.ok(AuthenticationResponse.builder().accessToken(jwt).build());

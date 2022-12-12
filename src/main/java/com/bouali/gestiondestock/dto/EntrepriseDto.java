@@ -38,7 +38,7 @@ public class EntrepriseDto {
     private String steWeb ;
 
     // fix me plz dall
-    @JsonIgnore
+    //@JsonIgnore
     private List<UtilisateurDto> utilisateurs ;
 
 

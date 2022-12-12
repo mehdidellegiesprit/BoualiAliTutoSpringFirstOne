@@ -31,9 +31,13 @@ public class EntrepriseServiceImpl implements EntrepriseService {
     private UtilisateurService utilisateurService ;
     private RolesRepository rolesRepository ;
 
-    @Autowired //injection des dependace par constructeur
-    public EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository){
+    @Autowired // TODO injection des dependace par constructeur
+    public EntrepriseServiceImpl(EntrepriseRepository entrepriseRepository,
+                                 UtilisateurService utilisateurService,
+                                 RolesRepository rolesRepository){
         this.entrepriseRepository=entrepriseRepository;
+        this.utilisateurService=utilisateurService;
+        this.rolesRepository=rolesRepository;
     }
 
     @Override

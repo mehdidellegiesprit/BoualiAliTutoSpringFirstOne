@@ -33,7 +33,7 @@ public class ClientDto {
 
     private Integer idEntreprise ;
 
-    @JsonIgnore
+    //@JsonIgnore
     private List<CommandeClientDto> commandeClients ;
 
     public static ClientDto fromEntity(Client client){

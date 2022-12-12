@@ -30,9 +30,16 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         UtilisateurDto utilisateur = service.findByEmail(email);
-
+        System.out.println("***************Roles******************");
+        System.out.println(service.findByEmail(email).getRoles());
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        utilisateur.getRoles().forEach(role->authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
+        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        // TODO njib liste des roles emte3 l user hetha utilisateur
+        // TODO get roles by utilisateur
+        // TODO Create repository de role et implementer les methodes
+//        utilisateur.getRoles()
+//                .forEach
+//                        (role->authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
 
 
         return new ExtendedUser(utilisateur.getEmail(), utilisateur.getMotDePasse(), utilisateur.getEntreprise().getId(),authorities) ;
