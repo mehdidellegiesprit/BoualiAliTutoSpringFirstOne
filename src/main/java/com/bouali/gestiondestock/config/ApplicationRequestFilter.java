@@ -27,6 +27,11 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
     @Autowired
     private ApplicationUserDetailsService userDetailsService;
 
+
+
+
+    // TODO si la a comme header "Authorization" et start with Bearer donc elle necessite un access token donc il faut
+    // TODO verfier si ce token et valide ou non
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
@@ -36,11 +41,16 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
         String idEntreprise = null  ;
 
 
+        // TODO si la a comme header "Authorization" et start with Bearer donc elle necessite un access token donc il faut
+        // TODO verfier si ce token et valide ou non
+
+
         if (StringUtils.hasLength(authHeader)&&authHeader.startsWith("Bearer")){
             jwt = authHeader.substring(7) ;
             userEmail = jwtUtil.extractUsername(jwt) ;
             idEntreprise = jwtUtil.extractIdEntreprise(jwt) ;
         }
+
         if(StringUtils.hasLength(userEmail) && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail) ;
             if(jwtUtil.validateToken(jwt, userDetails)){
