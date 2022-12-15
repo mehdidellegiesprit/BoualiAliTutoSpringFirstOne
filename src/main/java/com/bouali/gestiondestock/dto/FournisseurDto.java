@@ -37,7 +37,7 @@ public class FournisseurDto {
     private Integer idEntreprise ;
 
     // fix me plz dall
-    //@JsonIgnore
+    @JsonIgnore
     private List<CommandeFournisseurDto> commandeFournisseurs ;
 
     public static FournisseurDto fromEntity(Fournisseur fournisseur){

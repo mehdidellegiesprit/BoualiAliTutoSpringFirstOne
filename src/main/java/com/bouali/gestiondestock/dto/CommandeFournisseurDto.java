@@ -26,6 +26,7 @@ public class CommandeFournisseurDto {
 
     private Integer idEntreprise ;
 
+    @JsonIgnore
     private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurs ;
 
     public static CommandeFournisseurDto fromEntity (CommandeFournisseur commandeFournisseur){

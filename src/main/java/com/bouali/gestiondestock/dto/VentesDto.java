@@ -3,6 +3,7 @@ package com.bouali.gestiondestock.dto;
 import com.bouali.gestiondestock.model.Adresse;
 import com.bouali.gestiondestock.model.LigneVente;
 import com.bouali.gestiondestock.model.Ventes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class VentesDto {
 
     private Integer idEntreprise ;
 
+    @JsonIgnore
     private List<LigneVenteDto> ligneVentes ;
     public static VentesDto fromEntity (Ventes ventes){
 
