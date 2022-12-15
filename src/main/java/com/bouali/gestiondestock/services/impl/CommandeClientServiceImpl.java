@@ -219,7 +219,6 @@ public class CommandeClientServiceImpl implements CommandeClientService {
     @Override
     public CommandeClientDto updateArticle(Integer idCommande, Integer idLigneCommande,Integer idArticle) {
         // TODO modifier l 'id d'un article d'une commande (ligne commande)
-
         checkIdCommande(idCommande);
         checkIdLigneCommande(idLigneCommande);
 

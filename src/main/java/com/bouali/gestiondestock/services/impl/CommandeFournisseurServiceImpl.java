@@ -1,15 +1,14 @@
 package com.bouali.gestiondestock.services.impl;
 
 import com.bouali.gestiondestock.Repository.*;
-import com.bouali.gestiondestock.dto.CommandeClientDto;
-import com.bouali.gestiondestock.dto.CommandeFournisseurDto;
-import com.bouali.gestiondestock.dto.LigneCommandeClientDto;
-import com.bouali.gestiondestock.dto.LigneCommandeFournisseurDto;
+import com.bouali.gestiondestock.dto.*;
 import com.bouali.gestiondestock.exception.EntityNotFoundException;
 import com.bouali.gestiondestock.exception.ErrorCodes;
 import com.bouali.gestiondestock.exception.InvalidEntityException;
+import com.bouali.gestiondestock.exception.InvalidOperationException;
 import com.bouali.gestiondestock.model.*;
 import com.bouali.gestiondestock.services.CommandeFournisseurService;
+import com.bouali.gestiondestock.validator.ArticleValidator;
 import com.bouali.gestiondestock.validator.CommandeClientValidator;
 import com.bouali.gestiondestock.validator.CommandeFournisseurValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -93,6 +93,30 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
     }
 
     @Override
+    public CommandeFournisseurDto updateQuantiteCommande(Integer idCommande, Integer idLigneCommande, BigDecimal quantite) {
+        checkIdCommande(idCommande);
+        checkIdLigneCommande(idLigneCommande) ;
+
+        if (quantite==null || quantite.compareTo(BigDecimal.ZERO)==0){
+            log.error("l'ID de la ligne commande fournisseur is NULL ");
+            throw new InvalidOperationException("Impossible de modifier la commande fournisseur avec une quantite null ou zero",
+                    ErrorCodes.COMMANDE_FOURNISSEUR_NOT_MODIFIABLE);
+        }
+
+        CommandeFournisseurDto commandeFournisseur = checkEtatCommande(idCommande) ;
+
+        Optional<LigneCommandeFournisseur> ligneCommandeFournisseurOptional = findLigneCommandeFournisseur(idLigneCommande) ;
+
+        LigneCommandeFournisseur ligneCommandeFournisseur = ligneCommandeFournisseurOptional.get();
+
+        ligneCommandeFournisseur.setQuantite(quantite);
+
+        ligneCommandeFournisseurRepository.save(ligneCommandeFournisseur) ;
+
+        return commandeFournisseur;
+    }
+
+    @Override
     public CommandeFournisseurDto findById(Integer id) {
         if (id==null){
             log.error("commande Fournisseur ID is NULL ");
@@ -128,11 +152,142 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
     }
 
     @Override
+    public List<LigneCommandeFournisseurDto> findALlLigneCommandesFournisseurByCommandeFournisseurId_service(Integer idCommande) {
+        return ligneCommandeFournisseurRepository.findALlLigneCommandesFournisseurByCommandeFournisseurId(idCommande).stream()
+                .map(LigneCommandeFournisseurDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void delete(Integer id) {
         if (id==null){
             log.error("commande Fournisseur ID is NULL ");
             return ;
         }
         commandeFournisseurRepository.deleteById(id);
+    }
+
+    @Override
+    public CommandeFournisseurDto updateEtatCommande(Integer idCommande, EtatCommande etatCommande) {
+        checkIdCommande(idCommande);
+        if (!StringUtils.hasLength(String.valueOf(etatCommande))){
+            log.error("l'etat de la commande fournisseur is NULL ");
+            throw new InvalidOperationException("Impossible de modifier l' etat de la commande avec un etat  null ",
+                    ErrorCodes.COMMANDE_FOURNISSEUR_NOT_MODIFIABLE);
+        }
+
+        CommandeFournisseurDto commandeFournisseur = checkEtatCommande(idCommande);
+        commandeFournisseur.setEtatCommande(etatCommande);
+        CommandeFournisseur updatedCmd = commandeFournisseurRepository.save(CommandeFournisseurDto.toEntity(commandeFournisseur));
+
+        return CommandeFournisseurDto.fromEntity(updatedCmd) ;
+    }
+
+    @Override
+    public CommandeFournisseurDto updateFournisseur(Integer idCommande, Integer idFournisseur) {
+        checkIdCommande(idCommande);
+        if (idFournisseur==null){
+            log.error("l'ID de fournisseur is NULL ");
+            throw new InvalidOperationException("Impossible de modifier la commande avec un ID fournisseur null ",
+                    ErrorCodes.COMMANDE_FOURNISSEUR_NOT_MODIFIABLE);
+        }
+
+        CommandeFournisseurDto commandeFournisseur = checkEtatCommande(idCommande);
+
+        Optional<Fournisseur> fournisseurOptional = fournisseurRepository.findById(idFournisseur);
+        if (fournisseurOptional.isEmpty()){
+            throw new EntityNotFoundException(
+                    "Aucune  fournisseur n'a ete trouve avec l'ID  "+idFournisseur,ErrorCodes.CLIENT_NOT_FOUND);
+        }
+
+        commandeFournisseur.setFournisseur(FournisseurDto.fromEntity(fournisseurOptional.get()));
+
+        return CommandeFournisseurDto.fromEntity(
+                commandeFournisseurRepository.save(CommandeFournisseurDto.toEntity(commandeFournisseur))
+        );
+    }
+
+    @Override
+    public CommandeFournisseurDto updateArticle(Integer idCommande, Integer idLigneCommande, Integer idArticle) {
+        checkIdCommande(idCommande);
+        checkIdLigneCommande(idLigneCommande);
+
+        checkIdArticle(idArticle,"nouvel");
+
+        CommandeFournisseurDto commandeFournisseur = checkEtatCommande(idCommande) ;
+
+        Optional<LigneCommandeFournisseur> ligneCommandeFournisseur = findLigneCommandeFournisseur(idLigneCommande) ;
+
+        Optional<Article> articleOptional = articleRepository.findById(idArticle) ;
+
+        if (articleOptional.isEmpty()){
+            throw new EntityNotFoundException(
+                    "Aucune article n'a ete trouve avec l'ID  "+idArticle,ErrorCodes.ARTICLE_NOT_FOUND);
+        }
+        List<String> errors = ArticleValidator.validate(ArticleDto.fromEntity(articleOptional.get()));
+
+        if (!errors.isEmpty()){
+            throw new InvalidEntityException("Article Invalid",ErrorCodes.ARTICLE_NOT_VALID,errors);
+        }
+
+        LigneCommandeFournisseur ligneCommandeFournisseurToSaved = ligneCommandeFournisseur.get();
+        ligneCommandeFournisseurToSaved.setArticle(articleOptional.get());
+        ligneCommandeFournisseurRepository.save(ligneCommandeFournisseurToSaved) ;
+
+        return commandeFournisseur;
+    }
+
+    @Override
+    public CommandeFournisseurDto deleteArticle(Integer idCommande, Integer idLigneCommande) {
+        checkIdCommande(idCommande);
+        checkIdLigneCommande(idLigneCommande);
+
+        CommandeFournisseurDto commandeFournisseur = checkEtatCommande(idCommande);
+        //Just to check th LigneCommandeClient and inform the client if it is absent
+        findLigneCommandeFournisseur(idLigneCommande) ;
+
+        ligneCommandeFournisseurRepository.deleteById(idLigneCommande);
+        return commandeFournisseur ;
+    }
+
+    private void checkIdCommande(Integer idCommande){
+        if (idCommande==null){
+            log.error("commande fournisseur ID is NULL ");
+            throw new InvalidOperationException("Impossible de modifier l' etat de la commande avec un ID null ",
+                    ErrorCodes.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
+    }
+    private CommandeFournisseurDto checkEtatCommande(Integer idCommande) {
+        CommandeFournisseurDto commandeFournisseur = findById(idCommande);
+        if (commandeFournisseur.isCommandeLivree()){
+            throw new InvalidOperationException("Impossible de modifier la commande lorsque elle est livree",
+                    ErrorCodes.COMMANDE_FOURNISSEUR_NOT_MODIFIABLE);
+        }
+        return commandeFournisseur ;
+    }
+
+    private void checkIdLigneCommande(Integer idLigneCommande){
+        if (idLigneCommande==null){
+            log.error("l'ID de la ligne commande fournisseur is NULL ");
+            throw new InvalidOperationException("Impossible de modifier la commande fournisseur avec une ligne de commande  null ",
+                    ErrorCodes.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
+    }
+
+    private Optional<LigneCommandeFournisseur> findLigneCommandeFournisseur(Integer idLigneCommande) {
+        Optional<LigneCommandeFournisseur> ligneCommandeFournisseurOptional = ligneCommandeFournisseurRepository.findById(idLigneCommande);
+        if (ligneCommandeFournisseurOptional.isEmpty()){
+            throw new EntityNotFoundException(
+                    "Aucune Ligne commande  fournisseur n'a ete trouve avec l'ID  "+idLigneCommande,ErrorCodes.LIGNE_COMMANDE_FOURNISSEUR_NOT_FOUND);
+        }
+        return ligneCommandeFournisseurOptional;
+    }
+
+    private void checkIdArticle(Integer idArticle,String msg){
+        if (idArticle==null){
+            log.error("l'ID de "+msg+" article is NULL ");
+            throw new InvalidOperationException("Impossible de modifier l'etat de la commande fournisseur avec un "+msg+" ID  Article null",
+                    ErrorCodes.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
     }
 }

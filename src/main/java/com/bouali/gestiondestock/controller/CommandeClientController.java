@@ -35,7 +35,7 @@ public class CommandeClientController implements CommandeClientApi {
 
     @Override
     public ResponseEntity<CommandeClientDto> updateEtatCommande(Integer idCommande, EtatCommande etatCommande) {
-        System.out.println("updateEtatCommande d5alnaaaa *****************");
+        System.out.println("updateEtatCommande client d5alnaaaa *****************");
         return ResponseEntity.ok(commandeClientService.updateEtatCommande(idCommande,etatCommande));
     }
 

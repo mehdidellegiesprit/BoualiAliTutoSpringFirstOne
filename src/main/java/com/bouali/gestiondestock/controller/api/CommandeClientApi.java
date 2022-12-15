@@ -27,7 +27,6 @@ public interface CommandeClientApi {
                                                              @PathVariable("idLigneCommande") Integer idLigneCommande,
                                                              @PathVariable("quantite") BigDecimal quantite) ;
 
-
     @PatchMapping(value=APP_ROOT+"/commandesclients/update/client/{idCommande}/{idClient}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<CommandeClientDto> updateClient(@PathVariable("idCommande") Integer idCommande,@PathVariable("idClient") Integer idClient) ;
 
