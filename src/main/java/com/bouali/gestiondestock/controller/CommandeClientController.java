@@ -1,5 +1,6 @@
 package com.bouali.gestiondestock.controller;
 
+import com.bouali.gestiondestock.Repository.LigneCommandeClientRepository;
 import com.bouali.gestiondestock.controller.api.CommandeClientApi;
 import com.bouali.gestiondestock.dto.CommandeClientDto;
 import com.bouali.gestiondestock.dto.LigneCommandeClientDto;
@@ -12,16 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
 public class CommandeClientController implements CommandeClientApi {
 
     private CommandeClientService commandeClientService ;
+    private LigneCommandeClientRepository ligneCommandeClientRepository ;
 
     @Autowired
-    public CommandeClientController(CommandeClientService commandeClientService){
+    public CommandeClientController(CommandeClientService commandeClientService,LigneCommandeClientRepository ligneCommandeClientRepository){
         this.commandeClientService=commandeClientService;
+        this.ligneCommandeClientRepository=ligneCommandeClientRepository;
     }
 
     @Override
@@ -31,6 +35,7 @@ public class CommandeClientController implements CommandeClientApi {
 
     @Override
     public ResponseEntity<CommandeClientDto> updateEtatCommande(Integer idCommande, EtatCommande etatCommande) {
+        System.out.println("updateEtatCommande d5alnaaaa *****************");
         return ResponseEntity.ok(commandeClientService.updateEtatCommande(idCommande,etatCommande));
     }
 

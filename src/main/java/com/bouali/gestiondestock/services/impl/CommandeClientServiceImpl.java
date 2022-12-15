@@ -266,7 +266,7 @@ public class CommandeClientServiceImpl implements CommandeClientService {
 
     @Override
     public List<LigneCommandeClientDto> findALlLigneCommandesClientByCommandeClientId(Integer idCommande) {
-        return ligneCommandeClientRepository.findAllByCommandeClientId(idCommande).stream()
+        return ligneCommandeClientRepository.findAllLigneCommandeClientByCommandeClientId(idCommande).stream()
                 .map(LigneCommandeClientDto::fromEntity)
                 .collect(Collectors.toList());
     }

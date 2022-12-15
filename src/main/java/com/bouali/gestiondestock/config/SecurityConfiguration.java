@@ -56,6 +56,7 @@ private static final String[] AUTH_WHITELIST = {
                 .authorizeRequests().antMatchers("/**/auth/authenticate",
                         "/**/authenticate",
                         "/**/entreprises/create",
+                        "/**/commandesclients/lignesCommande/**",
                         "/**/utilisateurs/all",
                         "/v2/api-docs",
                         "/swagger-resources",
