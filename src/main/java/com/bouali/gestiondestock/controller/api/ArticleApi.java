@@ -1,6 +1,9 @@
 package com.bouali.gestiondestock.controller.api;
 
 import com.bouali.gestiondestock.dto.ArticleDto;
+import com.bouali.gestiondestock.dto.LigneCommandeClientDto;
+import com.bouali.gestiondestock.dto.LigneCommandeFournisseurDto;
+import com.bouali.gestiondestock.dto.LigneVenteDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,6 +51,18 @@ public interface ArticleApi {
             @ApiResponse(code=200,message = "La liste des articles / une liste vide ")
     })
     List<ArticleDto> findALl() ;
+
+    @GetMapping(value=APP_ROOT+"/articles/historique/vente/{idArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    List<LigneVenteDto> findHistoriqueVentes(@PathVariable("idArticle") Integer idArticle) ;
+
+    @GetMapping(value=APP_ROOT+"/articles/historique/commandeclient/{idArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    List<LigneCommandeClientDto> findHistoriqueCommandeClient(@PathVariable("idArticle") Integer idArticle) ;
+
+    @GetMapping(value=APP_ROOT+"/articles/historique/commandefournisseur/{idArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    List<LigneCommandeFournisseurDto> findHistoriqueCommandeFournisseur(@PathVariable("idArticle") Integer idArticle) ;
+
+    @GetMapping(value=APP_ROOT+"/articles/filter/category/{idCategory}",produces = MediaType.APPLICATION_JSON_VALUE)
+    List<ArticleDto> findArticleByIdCategory(@PathVariable("idCategory") Integer idCategory) ;
 
 
     @DeleteMapping(value=APP_ROOT+"/articles/delete/{idArticle}")

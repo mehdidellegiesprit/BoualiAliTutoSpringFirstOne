@@ -2,6 +2,7 @@ package com.bouali.gestiondestock.Repository;
 
 import com.bouali.gestiondestock.model.Article;
 import com.bouali.gestiondestock.model.LigneCommandeClient;
+import com.bouali.gestiondestock.model.LigneCommandeFournisseur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,4 +13,6 @@ public interface LigneCommandeClientRepository extends JpaRepository<LigneComman
     //List<LigneCommandeClient> findAllByCommandeClientId(Integer id);
     //@Query(value="select l.id from lignecommandeclient l",nativeQuery = true)
     List<LigneCommandeClient> findAllLigneCommandeClientByCommandeClientId(Integer id);
+
+    List<LigneCommandeClient> findAllByArticleId(Integer idArticle);
 }
