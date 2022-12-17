@@ -1,5 +1,6 @@
 package com.bouali.gestiondestock.services;
 
+import com.bouali.gestiondestock.dto.ChangerMotDePasseUtilisateurDto;
 import com.bouali.gestiondestock.dto.FournisseurDto;
 import com.bouali.gestiondestock.dto.UtilisateurDto;
 
@@ -15,4 +16,6 @@ public interface UtilisateurService {
     List<UtilisateurDto> findALl() ;
 
     void delete(Integer id) ;
+
+    UtilisateurDto changerMotDePasse(ChangerMotDePasseUtilisateurDto dto) ;
 }

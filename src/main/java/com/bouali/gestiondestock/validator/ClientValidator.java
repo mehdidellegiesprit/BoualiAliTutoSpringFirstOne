@@ -17,6 +17,7 @@ public class ClientValidator {
             errors.add("veiller renseigner la photo du client ");
             errors.add("veiller renseigner mail du client ");
             errors.add("veiller renseigner le num Tel du client ");
+            errors.addAll(AdresseValidator.validate(null)) ;
             return errors ;
         }
 
@@ -26,16 +27,13 @@ public class ClientValidator {
         if (!StringUtils.hasLength(dto.getPrenom())){
             errors.add("veiller renseigner le prenom du client ");
         }
-        if (!StringUtils.hasLength(dto.getPhoto())){
-            errors.add("veiller renseigner la photo du client ");
-        }
         if (!StringUtils.hasLength(dto.getMail())){
             errors.add("veiller renseigner mail du client ");
         }
         if (!StringUtils.hasLength(dto.getNumTel())){
             errors.add("veiller renseigner le num Tel du client ");
         }
-
+        errors.addAll(AdresseValidator.validate(dto.getAdresse()))  ;
         return errors ;
     }
 }

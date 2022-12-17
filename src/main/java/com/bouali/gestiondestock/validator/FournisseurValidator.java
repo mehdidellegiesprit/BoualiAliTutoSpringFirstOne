@@ -17,6 +17,7 @@ public class FournisseurValidator {
             errors.add("veiller renseigner la photo du fournisseur ");
             errors.add("veiller renseigner mail du fournisseur ");
             errors.add("veiller renseigner le num Tel du fournisseur ");
+            errors.addAll(AdresseValidator.validate(null)) ;
             return errors ;
         }
 
@@ -26,16 +27,13 @@ public class FournisseurValidator {
         if (!StringUtils.hasLength(dto.getPrenom())){
             errors.add("veiller renseigner le prenom du fournisseur ");
         }
-        if (!StringUtils.hasLength(dto.getPhoto())){
-            errors.add("veiller renseigner la photo du fournisseur ");
-        }
         if (!StringUtils.hasLength(dto.getMail())){
             errors.add("veiller renseigner mail du fournisseur ");
         }
         if (!StringUtils.hasLength(dto.getNumTel())){
             errors.add("veiller renseigner le num Tel du fournisseur ");
         }
-
+        errors.addAll(AdresseValidator.validate(dto.getAdresse()))  ;
         return errors ;
     }
 }
