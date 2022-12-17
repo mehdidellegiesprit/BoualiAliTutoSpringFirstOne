@@ -31,6 +31,10 @@ public enum ErrorCodes {
     ROLE_NOT_FOUND(14000),
     ROLE_NOT_VALID(14001),
 
+    // Liste des exceptions techniques
+    UPDATE_PHOTO_EXCEPTION(15000),
+    UNKNOWN_CONTEXT(15001),
+
     ;
     private int code ;
 
