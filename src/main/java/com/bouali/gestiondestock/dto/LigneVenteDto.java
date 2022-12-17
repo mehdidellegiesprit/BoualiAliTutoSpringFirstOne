@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 @Data
-public class    LigneVenteDto {
+public class LigneVenteDto {
 
     private Integer id ;
 

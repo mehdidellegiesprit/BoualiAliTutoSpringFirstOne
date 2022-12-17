@@ -143,6 +143,11 @@ public class CommandeClientServiceImpl implements CommandeClientService {
             log.error("commande client ID is NULL ");
             return ;
         }
+        List<LigneCommandeClient> ligneCommandeClients = ligneCommandeClientRepository.findAllLigneCommandeClientByCommandeClientId(id) ;
+        if (!ligneCommandeClients.isEmpty()){
+            throw new InvalidOperationException("Impossible de supprimer uune commande client deja utilisee ",
+                    ErrorCodes.COMMANDE_CLIENT_ALREADY_IN_USE) ;
+        }
         commandeClientRepository.deleteById(id);
     }
 
@@ -255,6 +260,8 @@ public class CommandeClientServiceImpl implements CommandeClientService {
         CommandeClientDto commandeClient = checkEtatCommande(idCommande);
         //Just to check th LigneCommandeClient and inform the client if it is absent
         findLigneCommandeClient(idLigneCommande) ;
+
+
 
         ligneCommandeClientRepository.deleteById(idLigneCommande);
         return commandeClient ;

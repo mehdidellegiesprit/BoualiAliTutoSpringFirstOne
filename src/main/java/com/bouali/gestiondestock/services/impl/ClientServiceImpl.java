@@ -2,13 +2,16 @@ package com.bouali.gestiondestock.services.impl;
 
 import com.bouali.gestiondestock.Repository.CategoryRepository;
 import com.bouali.gestiondestock.Repository.ClientRepository;
+import com.bouali.gestiondestock.Repository.CommandeClientRepository;
 import com.bouali.gestiondestock.dto.CategoryDto;
 import com.bouali.gestiondestock.dto.ClientDto;
 import com.bouali.gestiondestock.exception.EntityNotFoundException;
 import com.bouali.gestiondestock.exception.ErrorCodes;
 import com.bouali.gestiondestock.exception.InvalidEntityException;
+import com.bouali.gestiondestock.exception.InvalidOperationException;
 import com.bouali.gestiondestock.model.Category;
 import com.bouali.gestiondestock.model.Client;
+import com.bouali.gestiondestock.model.CommandeClient;
 import com.bouali.gestiondestock.services.ClientService;
 import com.bouali.gestiondestock.validator.CategoryValidator;
 import com.bouali.gestiondestock.validator.ClientValidator;
@@ -26,10 +29,12 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService {
 
     private ClientRepository clientRepository ;
+    private CommandeClientRepository commandeClientRepository ;
 
     @Autowired //injection des dependace par constructeur
-    public ClientServiceImpl(ClientRepository clientRepository){
+    public ClientServiceImpl(ClientRepository clientRepository,CommandeClientRepository commandeClientRepository){
         this.clientRepository=clientRepository;
+        this.commandeClientRepository=commandeClientRepository;
     }
 
     @Override
@@ -72,6 +77,11 @@ public class ClientServiceImpl implements ClientService {
         if(id==null){
             log.error("Client ID is null") ;
             return;
+        }
+        List<CommandeClient> commandeClients = commandeClientRepository.findAllByClientId(id) ;
+        if (!commandeClients.isEmpty()){
+            throw new InvalidOperationException("Impossible de supprimer un client  qui a  deja des commandes client  ",
+                    ErrorCodes.CLIENT_ALREADY_IN_USE) ;
         }
         clientRepository.deleteById(id);
     }
