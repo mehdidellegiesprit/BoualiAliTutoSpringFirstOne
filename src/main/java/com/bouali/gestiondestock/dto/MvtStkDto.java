@@ -2,6 +2,7 @@ package com.bouali.gestiondestock.dto;
 
 import com.bouali.gestiondestock.model.LigneVente;
 import com.bouali.gestiondestock.model.MvtStk;
+import com.bouali.gestiondestock.model.SourceMvtStk;
 import com.bouali.gestiondestock.model.TypeMvtStk;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,11 @@ public class MvtStkDto {
     //@JsonIgnore
     private ArticleDto article ;
 
+    private SourceMvtStk sourceMvt ;
+
     private TypeMvtStk typeMvt ;
+
+    private Integer idEntreprise ;
 
     public static MvtStkDto fromEntity (MvtStk mvtStk){
 
@@ -39,8 +44,10 @@ public class MvtStkDto {
                 .id(mvtStk.getId())
                 .dateMvt(mvtStk.getDateMvt())
                 .quantite(mvtStk.getQuantite())
-                .typeMvt(mvtStk.getTypeMvt())
                 .article(ArticleDto.fromEntity(mvtStk.getArticle()))
+                .sourceMvt(mvtStk.getSourceMvt())
+                .typeMvt(mvtStk.getTypeMvt())
+                .idEntreprise(mvtStk.getIdEntreprise())
                 .build();
     }
 
@@ -52,8 +59,11 @@ public class MvtStkDto {
         mvtStk.setId(mvtStkDto.getId());
         mvtStk.setDateMvt(mvtStkDto.getDateMvt());
         mvtStk.setQuantite(mvtStkDto.getQuantite());
-        mvtStk.setTypeMvt(mvtStkDto.getTypeMvt());
         mvtStk.setArticle(ArticleDto.toEntity(mvtStkDto.getArticle()));
+        mvtStk.setSourceMvt(mvtStkDto.getSourceMvt());
+        mvtStk.setTypeMvt(mvtStkDto.getTypeMvt());
+        mvtStk.setIdEntreprise(mvtStkDto.getIdEntreprise());
+
         return mvtStk;
     }
 }
