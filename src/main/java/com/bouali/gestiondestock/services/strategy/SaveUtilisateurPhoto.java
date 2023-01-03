@@ -11,6 +11,7 @@ import com.bouali.gestiondestock.services.UtilisateurService;
 import com.flickr4java.flickr.FlickrException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -18,6 +19,8 @@ import java.io.InputStream;
 
 @Service("utilisateurStrategy")
 @Slf4j
+@Primary
+//zedet ena @Primary bech ye5dem l programme a voir fel front mbaa3ed
 public class SaveUtilisateurPhoto implements Strategy<UtilisateurDto> {
 
     private FlickrService flickrService ;

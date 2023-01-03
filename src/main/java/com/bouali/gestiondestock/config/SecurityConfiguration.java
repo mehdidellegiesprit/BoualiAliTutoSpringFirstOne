@@ -3,6 +3,8 @@ package com.bouali.gestiondestock.config;
 import com.bouali.gestiondestock.services.auth.ApplicationUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,8 +15,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Arrays;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -51,11 +58,13 @@ private static final String[] AUTH_WHITELIST = {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //http.csrf().disable() ;
         http.csrf().disable()
                 //.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
                 .authorizeRequests().antMatchers("/**/auth/authenticate",
                         "/**/authenticate",
                         "/**/entreprises/create",
+                        //"/**/categories/all",
                         "/**/commandesclients/lignesCommande/**",
                         "/**/utilisateurs/all",
                         "/v2/api-docs",
@@ -66,7 +75,8 @@ private static final String[] AUTH_WHITELIST = {
                         "/swagger-ui.html",
                         "/webjars/**",
                         "/v3/api-docs/**",
-                        "swagger-ui/**").permitAll() // TODO ces URL SONT PERMIT SANS AVOIR ETRE AUTHENTIFIER (sans token)
+                        "swagger-ui/**")
+                .permitAll() // TODO ces URL SONT PERMIT SANS AVOIR ETRE AUTHENTIFIER (sans token)
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) ;
@@ -85,4 +95,7 @@ private static final String[] AUTH_WHITELIST = {
     public PasswordEncoder passwordEncoder (){
         return NoOpPasswordEncoder.getInstance();
     }
+
+
+
 }

@@ -5,10 +5,11 @@ import com.bouali.gestiondestock.dto.ClientDto;
 import com.bouali.gestiondestock.services.CategoryService;
 import com.bouali.gestiondestock.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 public class ClientController implements ClientApi {
 

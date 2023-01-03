@@ -6,10 +6,11 @@ import com.bouali.gestiondestock.dto.VentesDto;
 import com.bouali.gestiondestock.services.UtilisateurService;
 import com.bouali.gestiondestock.services.VentesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 public class VenteController implements VentesApi {
 

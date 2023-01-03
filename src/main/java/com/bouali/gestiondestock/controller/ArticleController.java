@@ -7,12 +7,12 @@ import com.bouali.gestiondestock.dto.LigneCommandeFournisseurDto;
 import com.bouali.gestiondestock.dto.LigneVenteDto;
 import com.bouali.gestiondestock.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
-
+@CrossOrigin(origins= {"*"})
 @RestController
 public class ArticleController implements ArticleApi {
 

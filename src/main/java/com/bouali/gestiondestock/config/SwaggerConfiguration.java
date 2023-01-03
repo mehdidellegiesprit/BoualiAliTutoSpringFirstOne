@@ -40,8 +40,9 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(
                         new ApiInfoBuilder()
-                                .description("Gestion de stock api documentation")
+                                .description("Gestion de stock api documentation mahmoud")
                                 .title("Gestion de stock REST API ")
+                                .license("mahmoud")
                                 .build()
                 )
                 .groupName("REST API V1")

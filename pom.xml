@@ -57,17 +57,17 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-<!--        a tester-->
+                <dependency>
+                    <groupId>io.springfox</groupId>
+                    <artifactId>springfox-swagger2</artifactId>
+                    <version>2.9.2</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.springfox</groupId>
+                    <artifactId>springfox-swagger-ui</artifactId>
+                    <version>2.9.2</version>
+                </dependency>
+        <!--        a tester-->
 <!--        <dependency>-->
 <!--            <groupId>io.springfox</groupId>-->
 <!--            <artifactId>springfox-boot-starter</artifactId>-->
@@ -124,20 +124,20 @@
                                 <location>com.bouali.gestiondestock.controller</location>
                             </locations>
                             <basePath>http://localhost:8081</basePath>
-                                <info>
-                                    <title>Swagger Api Documentation for Gestion Application</title>
-                                    <version>${project.version}</version>
-                                    <description>Swagger Api Documentation for Gestion de stock applicatoin </description>
-                                    <contact>
-                                        <email>bouali.social@gmail.com</email>
-                                        <name>Ali bouali</name>
-                                        <url>https://www.udemy.com</url>
-                                    </contact>
-                                </info>
-                                <outputPath>${project.build.directory}</outputPath>
-                                <outputFormats>json</outputFormats>
-                                <swaggerApiReader>com.github.kongchen.swagger.docgen.reader.SpringMvcApiReader</swaggerApiReader>
-                                <swaggerDirectory>${project.build.directory}</swaggerDirectory>
+                            <info>
+                                <title>Swagger Api Documentation for Gestion Application</title>
+                                <version>${project.version}</version>
+                                <description>Swagger Api Documentation for Gestion de stock application 222222 </description>
+                                <contact>
+                                    <email>bouali.social@gmail.com</email>
+                                    <name>Ali bouali</name>
+                                    <url>https://www.udemy.com</url>
+                                </contact>
+                            </info>
+                            <outputPath>${project.build.directory}</outputPath>
+                            <outputFormats>json</outputFormats>
+                            <swaggerApiReader>com.github.kongchen.swagger.docgen.reader.SpringMvcApiReader</swaggerApiReader>
+                            <swaggerDirectory>${project.build.directory}</swaggerDirectory>
                         </apiSource>
                     </apiSources>
                 </configuration>

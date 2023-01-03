@@ -66,6 +66,7 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
         // TODO MDC.put() fournit par slf4j lombok : elle me donne la possibilitee de stockeé un objet sans avoir cree un class comme une session ou cookies !
         MDC.put("idEntreprise",idEntreprise);
         // TODO continuer le rest des filtre !
+
         chain.doFilter(request,response);
     }
 }

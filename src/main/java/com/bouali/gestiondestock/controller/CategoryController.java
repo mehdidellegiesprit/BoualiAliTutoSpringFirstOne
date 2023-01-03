@@ -5,13 +5,13 @@ import com.bouali.gestiondestock.dto.CategoryDto;
 import com.bouali.gestiondestock.services.ArticleService;
 import com.bouali.gestiondestock.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
 
-
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class CategoryController implements CategoryApi {
 

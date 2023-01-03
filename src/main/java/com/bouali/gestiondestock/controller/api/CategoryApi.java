@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static com.bouali.gestiondestock.utils.Constants.APP_ROOT;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @Api(APP_ROOT+"/categories")
 public interface CategoryApi {
     @PostMapping(value=APP_ROOT+"/categories/create",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)

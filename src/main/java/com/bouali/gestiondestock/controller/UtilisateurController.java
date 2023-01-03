@@ -5,10 +5,11 @@ import com.bouali.gestiondestock.dto.UtilisateurDto;
 import com.bouali.gestiondestock.services.FournisseurService;
 import com.bouali.gestiondestock.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 public class UtilisateurController implements UtilisateurApi {
 

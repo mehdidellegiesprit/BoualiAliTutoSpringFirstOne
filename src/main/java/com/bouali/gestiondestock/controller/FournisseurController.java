@@ -5,11 +5,12 @@ import com.bouali.gestiondestock.dto.FournisseurDto;
 import com.bouali.gestiondestock.services.CommandeFournisseurService;
 import com.bouali.gestiondestock.services.FournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
+@CrossOrigin("*")
 @RestController
 public class FournisseurController implements FournisseurApi {
 
