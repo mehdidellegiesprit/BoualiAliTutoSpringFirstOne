@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class CategoryController implements CategoryApi {
 

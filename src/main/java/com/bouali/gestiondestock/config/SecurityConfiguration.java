@@ -9,15 +9,18 @@ import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -32,36 +35,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private ApplicationRequestFilter applicationRequestFilter; // hethi emte3 do filter internal !!!
 
-
-//    private static final String[] AUTH_WHITELIST = {
-//            "/swagger-resources/**",
-//            "/swagger-ui.html",
-//            "/v2/api-docs",
-//            "/webjars/**",
-//            "/**/**/auth/authenticate"
-//    };
-private static final String[] AUTH_WHITELIST = {
-        "/swagger-resources/**",
-        "/swagger-ui.html",
-        "/v2/api-docs",
-        "/webjars/**",
-        "/**/**/auth/authenticate"
-};
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // TODO AuthenticationManagerBuilder c 'est le manager d'authentification
         // TODO on va dire Que AuthenticationManagerBuilder il va utiliser mon service applicationUserDetailsService
         auth.userDetailsService(applicationUserDetailsService)
-            .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
     }
     // TODO add her new
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.csrf().disable() ;
         http.csrf().disable()
-                //.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
-                .authorizeRequests().antMatchers("/**/auth/authenticate",
+                .authorizeRequests()
+                .antMatchers("/**/auth/authenticate",
                         "/**/authenticate",
                         "/**/entreprises/create",
                         //"/**/categories/all",
