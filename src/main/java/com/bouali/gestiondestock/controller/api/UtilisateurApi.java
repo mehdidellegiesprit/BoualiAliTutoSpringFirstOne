@@ -1,6 +1,7 @@
 package com.bouali.gestiondestock.controller.api;
 
 
+import com.bouali.gestiondestock.dto.ChangerMotDePasseUtilisateurDto;
 import com.bouali.gestiondestock.dto.UtilisateurDto;
 import io.swagger.annotations.Api;
 import org.springframework.http.MediaType;
@@ -21,9 +22,15 @@ public interface UtilisateurApi {
     @GetMapping(value=UTILISATEUR_ENDPOINT+"/{idUtilisateur}",produces = MediaType.APPLICATION_JSON_VALUE)
     UtilisateurDto findById(@PathVariable("idUtilisateur") Integer id) ;
 
+    @GetMapping(value=UTILISATEUR_ENDPOINT+"/findByEmail/{email}",produces = MediaType.APPLICATION_JSON_VALUE)
+    UtilisateurDto findByEmail(@PathVariable("email") String email) ;
+
     @GetMapping(value=UTILISATEUR_ENDPOINT+"/all",produces = MediaType.APPLICATION_JSON_VALUE)
     List<UtilisateurDto> findALl() ;
 
     @DeleteMapping(value=UTILISATEUR_ENDPOINT+"/delete/{idUtilisateur}")
     void delete(@PathVariable("idUtilisateur") Integer id) ;
+
+    @PostMapping(value=UTILISATEUR_ENDPOINT+"/changerMotDePasse",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    UtilisateurDto changerMotDePasse(@RequestBody ChangerMotDePasseUtilisateurDto dto) ;
 }

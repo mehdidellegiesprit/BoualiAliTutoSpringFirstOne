@@ -107,7 +107,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private void validate (ChangerMotDePasseUtilisateurDto dto) {
         if (dto == null) {
-            log.warn("impossibkle de modifier le mot de passe avec un objet null ");
+            log.warn("impossible de modifier le mot de passe avec un objet null ");
             throw new InvalidOperationException("Aucune information n'a ete fournit pour pouvoir changer le mot de passe ",
                     ErrorCodes.UTILISATEUR_CHANGE_PASSWORD_OBJECT_NOT_VALID) ;
         }
