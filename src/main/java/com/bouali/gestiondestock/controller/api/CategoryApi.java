@@ -20,7 +20,7 @@ public interface CategoryApi {
     })
     CategoryDto save(@RequestBody CategoryDto dto) ;
 
-    @GetMapping(value=APP_ROOT+"/categories/{idCategory}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value=APP_ROOT+"/categories/findById/{idCategory}",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value=" Rechercher une category par ID" , notes = "Cette methode permet de chercher une categorie par son ID  ",response = CategoryDto.class)
     @ApiResponses(value = {
             @ApiResponse(code=200,message = "La categorie  a ete trouve dans la BDD "),
@@ -28,7 +28,7 @@ public interface CategoryApi {
     })
     CategoryDto findById(@PathVariable("idCategory") Integer idCategory) ;
 
-    @GetMapping(value=APP_ROOT+"/categories/{codeCategory}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value=APP_ROOT+"/categories/findByCode/{codeCategory}",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value=" Rechercher une categorie par CODE" , notes = "Cette methode permet de chercher une categorie par son CODE  ",response = CategoryDto.class)
     @ApiResponses(value = {
             @ApiResponse(code=200,message = "La categorie a ete trouve dans la BDD "),
