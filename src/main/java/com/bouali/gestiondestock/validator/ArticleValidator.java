@@ -12,6 +12,7 @@ public class ArticleValidator {
         List<String> errors = new ArrayList<>();
 
         if (dto==null) {
+            errors.add("veiller renseigner le code  de l'article ");
             errors.add("veiller renseigner la designation de l'article ");
             errors.add("veiller renseigner le prix unitaire de l'article ");
             errors.add("veiller renseigner le taux TVA de l'article ");
@@ -20,6 +21,10 @@ public class ArticleValidator {
             return errors ;
         }
 
+
+        if (!StringUtils.hasLength(dto.getCodeArticle())){
+            errors.add("veiller renseigner le code  de l'article ");
+        }
 
         if (!StringUtils.hasLength(dto.getDesignation())){
             errors.add("veiller renseigner la designation de l'article ");
@@ -33,7 +38,7 @@ public class ArticleValidator {
         if ((dto.getPrixUnitaireTtc())==null){
             errors.add("veiller renseigner le prix unitaire Ttc de l'article ");
         }
-        if (dto.getCategory()==null){
+        if (dto.getCategory()==null || dto.getCategory().getId()==-1){
             errors.add("veiller renseigner la categorie de l'article ");
         }
 

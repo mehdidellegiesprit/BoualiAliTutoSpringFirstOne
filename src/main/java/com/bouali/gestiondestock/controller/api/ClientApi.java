@@ -17,7 +17,7 @@ public interface ClientApi {
     ClientDto save(@RequestBody ClientDto dto) ;
 
 
-    @GetMapping(value=APP_ROOT+"/clients/{idClient}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value=APP_ROOT+"/clients/findById/{idClient}",produces = MediaType.APPLICATION_JSON_VALUE)
     ClientDto findById(@PathVariable("idClient") Integer id) ;
 
 

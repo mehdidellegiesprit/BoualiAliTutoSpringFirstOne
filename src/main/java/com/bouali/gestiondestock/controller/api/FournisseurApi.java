@@ -15,7 +15,7 @@ public interface FournisseurApi {
     @PostMapping(value=FOURNISSEUR_ENDPOINT+"/create",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     FournisseurDto save(@RequestBody FournisseurDto dto) ;
 
-    @GetMapping(value=FOURNISSEUR_ENDPOINT+"/{idFournisseur}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value=FOURNISSEUR_ENDPOINT+"/findById/{idFournisseur}",produces = MediaType.APPLICATION_JSON_VALUE)
     FournisseurDto findById(@PathVariable("idFournisseur") Integer id) ;
 
     @GetMapping(value=FOURNISSEUR_ENDPOINT+"/all",produces = MediaType.APPLICATION_JSON_VALUE)
